@@ -3,7 +3,7 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import json
 import pickle
-
+import os
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
@@ -16,6 +16,17 @@ documents = []
 ignore_words = ['?', '!']
 data_file = open('intents.json').read()
 intents = json.loads(data_file)
+
+""" Dont know above code works"""
+
+allJsonFiles = os.listdir('collection')
+for jsonFile in allJsonFiles:
+    data_file = open('collection/' + jsonFile).read()
+    intentLoaded = json.loads(data_file)
+    intents.update(intentLoaded)
+
+""" Dont know above code works"""
+
 
 
 for intent in intents['intents']:
